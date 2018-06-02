@@ -8,7 +8,9 @@ This code presumes that that the sample dataset (X) contains columns of numeric 
 This implementation was influenced by scikit-learns own implementation (https://github.com/scikit-learn/scikit-learn/tree/master/sklearn/neighbors) and is comparable to it in performance. Included are routines to compare this KNN code to scikit-learn's KNeighborsClassifier, and typically they perform similarly. Also, useful was going through Jason Brownlee's tutorials on KNN available on https://machinelearningmastery.com/start-here/. However, this code adds some new items such as using scikit-learns Iris dataset, numpy array basing, and plotting to show Euclidean distance.
 
 ## Source code
-* **knn_our.py:** The heart of the implementation, containing functions for computing Euclidean distance, sorting nearest neighbors, collecting the vote from each neighbor about which other element is its nearest neighbor, computing accuracy vs. a test set, and making predictions.
+* **knn_our.py:** The heart of the implementation, containing functions for computing Euclidean distance, sorting nearest neighbors, collecting the vote from each neighbor about which other element is its nearest neighbor, computing accuracy vs. a test set, and making predictions. 
+
+Also, a plot of the Euclidean distance is provided for one (or more than one) of the comparisons, showing the K items circled which will be included in the voting. If you want to see every row plotted, you can find the plt.show() line in getNeighbors and uncomment it, but that does produce one plot per row which is a lot. Default is one plot per run, with the last row being what's shown. 
 * **knn_skl.py:** This code simply returns a scikit-learn KNeighborsClassifier for comparison to our implementation.
 * **knn_iris.py:** Run this code to measure accuracy against the famous Iris dataset, as provided by scikit-learn.
 * **knn_random.py:** Run this code to measure accuracy agaist a randomly generated dataset, as provided by scikit-learn's make_classfication.
