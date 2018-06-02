@@ -1,3 +1,5 @@
+
+
 # Code Cleanup for Data 558
 This module provides functions to support a K-nearest neighbors classification of a given dataset.  
 
@@ -17,11 +19,15 @@ Also, a plot of the Euclidean distance is provided for one (or more than one) of
 * **knn_data.py** This module contains functions to load and standardize the datasets.
 
 ## Use
-Run knn_random in Python 3 to launch the method on a simple simulated dataset, visualize the training process, and print the performance.
+Make sure all files are downloaded and available in your Python path/environment for importing, as they cross-reference each other.
+
+Run knn_random in Python 3 to launch the method on a simple simulated dataset, visualize the training process, and print the performance. You can change K to see different neighbor counts.
   
-Run knn_iris in Python 3 to launch the method on a real-world dataset of your choice, visualize the training process, and print the performance.
+Run knn_iris in Python 3 to launch the method on a real-world dataset of your choice, visualize the training process, and print the performance. You can change K to see different neighbor counts.
 
 Either of the above includes a comparison to the accuracy of sci-kit learn's KNeighborsClassifier. Re-running knn_random should show that usually they are similar.
+
+In knn_our you can find and comment/uncomment the two plt.show() calls to choose to show one plot for a run or one plot for each comparison. Default as checked in is one plot total not one per row.
 
 
 
