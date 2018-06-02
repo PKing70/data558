@@ -27,7 +27,7 @@ test_size = 0.25    # split ratio: 0.25=one quarter of dataset is set for test
 X_train, X_test, y_train, y_test = loadIrisData(test_size)
 
 # How many neighbors?
-k=3
+k=10
 
 # Get prediction accuracy from both ways
 accuracy = ourKnn(X_train, y_train, X_test, y_test, k)

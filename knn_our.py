@@ -53,13 +53,19 @@ def getNeighbors(X_train, X_test_i, k):
         dists.append((h, dist))               # Add it to a list
     
     dists.sort(key=operator.itemgetter(1))    # Sort the list by distance
+
+    plt = knnPlot(dists, k)
+    
+    # Uncomment the following line if you want to see the euclidean distances
+    # for every row, rather than just one example row.
+    #plt.show()
     
     neighbors = []
     
     for n in range(k):                        # For the k nearest neighbors
         neighbors.append(dists[n][0])         # Add them to a list
         
-    return neighbors 
+    return neighbors, plt
 
 def getVotes(neighbors, y_train):
     """
@@ -120,11 +126,57 @@ def ourKnn(X_train, y_train, X_test, y_test, k):
     predictions=[]
     
     for i in range(len(X_test)):              # For each item in X)_test
-        neighbors = getNeighbors(X_train, X_test[i,:], k) # Get its k neighbors 
+        neighbors, plt = getNeighbors(X_train, X_test[i,:], k) # Get k neighbors
         result = getVotes(neighbors, y_train) # Vote on which are closest
         predictions.append(result)
-    
+        
     accuracy = getAcc(y_test, predictions)    # Measure accuracy
+    
+    # Show the euclidean distance plot once. If you want one per row of sample
+    # data, go to getneighbors and show the plot from there.
+    plt.show()
     
     return accuracy
 
+def knnPlot(dists, k):
+    """
+    Perform a K-nearest neighbors evaluation between a train and test set
+    Parameters:      
+        dists    The distances from the test item.
+        k        The number of other items to consider and circle.
+    
+    Returns:       
+        plt      The plot of the Euclidean distance between the test item and K
+                 with the included points circled.
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    
+    plt.gcf().clear()
+    distances = [x[1] for x in dists]
+    ys = np.ones(len(distances))*0.5
+
+    # Add the line and dots
+    plt.axis([-0.2, max(distances)+0.2, -5, 5])
+    plt.plot(distances, ys, 'ro')
+    plt.plot(distances, ys) 
+    plt.plot(0, 0.5, 'bo')
+    
+    # Add the X axis title
+    plt.xlabel('Euclidean distance from X_test row ')
+
+    # Add the annotations
+    plt.annotate('test', xy=(0, 0.5), xytext=(0, 2),
+                 arrowprops=dict(arrowstyle="->"))
+    plt.annotate('K', xy=(dists[k-1][1], 0.5), 
+                 xytext=(dists[k-1][1], -2), arrowprops=dict(arrowstyle="->"))
+    
+    # Add the circle
+    circle = plt.Circle((dists[k-1][1]/2, 0.5), dists[k-1][1]/2, 
+                        color='yellow') 
+    fig = plt.gcf()
+    ax = fig.gca()
+    ax.get_yaxis().set_visible(False)
+    ax.add_artist(circle)
+
+    return plt
